@@ -5,12 +5,13 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 
 import com.appenjoyer.lightsout.R;
 
 public class LightsOutBoard extends FrameLayout implements View.OnClickListener {
 
-    private EnhancedGridLayout mGridView;
+    private GridLayout mGridView;
     private int mRowsCount;
     private int mColsCount;
     private OnItemClickListener mOnItemClickListener;
@@ -38,7 +39,7 @@ public class LightsOutBoard extends FrameLayout implements View.OnClickListener 
             typedArray.recycle();
         }
         View layout = inflate(getContext(), R.layout.view_lights_board, null);
-        mGridView = (EnhancedGridLayout) layout.findViewById(R.id.view_grid);
+        mGridView = (GridLayout) layout.findViewById(R.id.view_grid);
         mGridView.setRowCount(mRowsCount);
         mGridView.setColumnCount(mColsCount);
         addView(layout);
@@ -59,7 +60,8 @@ public class LightsOutBoard extends FrameLayout implements View.OnClickListener 
     }
 
     public View getChildAt(int rowIndex, int columnIndex) {
-        return mGridView.getChildAt(rowIndex, columnIndex);
+        int index = (getColumnsCount() * rowIndex) + columnIndex;
+        return mGridView.getChildAt(index);
     }
 
     public int getColumnsCount() {
