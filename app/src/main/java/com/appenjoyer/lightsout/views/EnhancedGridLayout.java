@@ -5,17 +5,17 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.GridLayout;
 
-public class LightsGridView extends GridLayout {
+public class EnhancedGridLayout extends GridLayout {
 
-    public LightsGridView(Context context) {
+    public EnhancedGridLayout(Context context) {
         super(context);
     }
 
-    public LightsGridView(Context context, AttributeSet attrs) {
+    public EnhancedGridLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public LightsGridView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public EnhancedGridLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

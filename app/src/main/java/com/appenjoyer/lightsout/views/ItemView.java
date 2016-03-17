@@ -1,8 +1,5 @@
 package com.appenjoyer.lightsout.views;
 
-/**
- * Created by Joan on 17/03/2016.
- */
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,16 +11,16 @@ import com.appenjoyer.lightsout.Interfaces.OnToggledListener;
 
 public class ItemView extends View{
 
-    boolean touchOn;
-    boolean mDownTouch = false;
-    private OnToggledListener toggledListener;
-    int _IdRow = 0;
-    int _IdColumn = 0;
+    private boolean mTouchOn;
+    private boolean mDownTouch = false;
+    private OnToggledListener mListener;
+    private int mRowIndex = 0;
+    private int mColumnIndex = 0;
 
     public ItemView(Context context, int Rows, int Columns) {
         super(context);
-        this._IdRow = Rows;
-        this._IdColumn = Columns;
+        this.mRowIndex = Rows;
+        this.mColumnIndex = Columns;
         init();
     }
 
@@ -43,7 +40,7 @@ public class ItemView extends View{
     }
 
     private void init() {
-        touchOn = false;
+        mTouchOn = false;
     }
 
     @Override
@@ -54,24 +51,26 @@ public class ItemView extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (touchOn) {
+        if (mTouchOn) {
             canvas.drawColor(Color.RED);
         } else {
             canvas.drawColor(Color.GRAY);
         }
     }
-    //onClick not possible to use on custom View so, onTouchEvent is the solution
+
+    public boolean isTouchOn() {
+        return mTouchOn;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
-
         switch (event.getAction()) {
-            //if Click
             case MotionEvent.ACTION_DOWN:
-                touchOn = !touchOn;
+                mTouchOn = !mTouchOn;
                 invalidate();
-                if(toggledListener != null){
-                    toggledListener.OnToggled(this, touchOn);
+                if(mListener != null){
+                    mListener.OnToggled(this, mTouchOn);
                 }
                 mDownTouch = true;
                 return true;
@@ -93,15 +92,15 @@ public class ItemView extends View{
     }
 
     public void setOnToggledListener(OnToggledListener listener){
-        toggledListener = listener;
+        mListener = listener;
     }
 
-    public int get_IdRow() {
-        return _IdRow;
+    public int getRowIndex() {
+        return mRowIndex;
     }
 
-    public int get_IdColumn() {
-        return _IdColumn;
+    public int getColumnIndex() {
+        return mColumnIndex;
     }
 
 }
