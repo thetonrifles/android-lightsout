@@ -6,12 +6,11 @@ import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
-import com.appenjoyer.lightsout.Interfaces.OnToggledListener;
 import com.appenjoyer.lightsout.R;
 import com.appenjoyer.lightsout.views.ItemView;
 import com.appenjoyer.lightsout.views.LightsOutBoard;
 
-public class MainActivity extends AppCompatActivity implements OnToggledListener {
+public class MainActivity extends AppCompatActivity implements LightsOutBoard.OnItemClickListener {
 
     private LightsOutBoard mLightsOutBoard;
 
@@ -20,14 +19,9 @@ public class MainActivity extends AppCompatActivity implements OnToggledListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mLightsOutBoard = (LightsOutBoard) findViewById(R.id.grid);
+        mLightsOutBoard.setOnItemClickListener(this);
+        mLightsOutBoard.buildChildren();
 
-        for (int xPos = 0; xPos < mLightsOutBoard.getRowsCount(); xPos++) {
-            for (int yPos = 0; yPos < mLightsOutBoard.getColumnsCount(); yPos++) {
-                ItemView tView = new ItemView(this, xPos, yPos);
-                tView.setOnToggledListener(this);
-                mLightsOutBoard.addItemView(tView);
-            }
-        }
         mLightsOutBoard.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -54,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements OnToggledListener
     }
 
     @Override
-    public void OnToggled(ItemView v, boolean touchOn) {
-        String text = v.getRowIndex() + " - " + v.getColumnIndex();
+    public void onItemClick(ItemView view) {
+        String text = view.getRowIndex() + " - " + view.getColumnIndex();
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
     }
 

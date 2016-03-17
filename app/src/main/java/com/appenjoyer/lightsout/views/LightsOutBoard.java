@@ -44,17 +44,22 @@ public class LightsOutBoard extends FrameLayout implements View.OnClickListener 
         addView(layout);
     }
 
+    public void buildChildren() {
+        for (int i = 0; i < getRowsCount(); i++) {
+            for (int j = 0; j < getColumnsCount(); j++) {
+                ItemView view = new ItemView(getContext(), i, j);
+                view.setOnClickListener(this);
+                mGridView.addView(view);
+            }
+        }
+    }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         mOnItemClickListener = listener;
     }
 
     public View getChildAt(int rowIndex, int columnIndex) {
         return mGridView.getChildAt(rowIndex, columnIndex);
-    }
-
-    public void addItemView(ItemView view) {
-        view.setOnClickListener(this);
-        mGridView.addView(view);
     }
 
     public int getColumnsCount() {
