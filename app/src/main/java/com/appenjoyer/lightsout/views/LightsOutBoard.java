@@ -59,9 +59,9 @@ public class LightsOutBoard extends FrameLayout implements View.OnClickListener 
         mOnItemClickListener = listener;
     }
 
-    public View getChildAt(int rowIndex, int columnIndex) {
+    public ItemView getChildAt(int rowIndex, int columnIndex) {
         int index = (getColumnsCount() * rowIndex) + columnIndex;
-        return mGridView.getChildAt(index);
+        return (ItemView) mGridView.getChildAt(index);
     }
 
     public int getColumnsCount() {
