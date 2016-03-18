@@ -64,6 +64,10 @@ public class LightsOutBoard extends FrameLayout implements View.OnClickListener 
         return (ItemView) mGridView.getChildAt(index);
     }
 
+    public boolean isTouchOn(int rowIndex, int columnIndex) {
+        return getChildAt(rowIndex, columnIndex).isTouchOn();
+    }
+
     public int getColumnsCount() {
         return mGridView.getColumnCount();
     }
