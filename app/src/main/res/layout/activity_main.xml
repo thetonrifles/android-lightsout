@@ -8,6 +8,7 @@
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        app:cells_space="2dp"
         app:rows_num="6"
         app:cols_num="6" />
 

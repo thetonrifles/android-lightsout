@@ -4,6 +4,7 @@
     <declare-styleable name="LightsOutBoard">
         <attr name="rows_num" format="integer" />
         <attr name="cols_num" format="integer" />
+        <attr name="cells_space" format="dimension" />
     </declare-styleable>
 
 </resources>
