@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity implements LightsOutBoard.On
 
         LightsOutBoard board  = (LightsOutBoard) findViewById(R.id.grid);
         board.setOnItemClickListener(this);
-        board.buildChildren();
+
+        board.buildChildren(3, 3);
     }
 
     @Override

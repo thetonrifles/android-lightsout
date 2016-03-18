@@ -36,10 +36,14 @@ public class LightsOutBoard extends FrameLayout implements View.OnClickListener 
     }
 
     private void init(Context context, AttributeSet attrs) {
+        // default values
+        mRowsCount = 1;
+        mColsCount = 1;
+        mCellSpace = dpToPx(DEFAULT_CELLS_SPACE);
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LightsOutBoard);
-            mRowsCount = typedArray.getInteger(R.styleable.LightsOutBoard_rows_num, 0);
-            mColsCount = typedArray.getInteger(R.styleable.LightsOutBoard_cols_num, 0);
+            mRowsCount = typedArray.getInteger(R.styleable.LightsOutBoard_rows_num, 1);
+            mColsCount = typedArray.getInteger(R.styleable.LightsOutBoard_cols_num, 1);
             mCellSpace = (int) typedArray.getDimension(R.styleable.LightsOutBoard_cells_space,
                     dpToPx(DEFAULT_CELLS_SPACE));
             typedArray.recycle();
@@ -71,6 +75,14 @@ public class LightsOutBoard extends FrameLayout implements View.OnClickListener 
     private int dpToPx(int dp) {
         DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public void buildChildren(int rowsCount, int colsCount) {
+        mRowsCount = rowsCount;
+        mColsCount = colsCount;
+        mGridView.setRowCount(mRowsCount);
+        mGridView.setColumnCount(mColsCount);
+        buildChildren();
     }
 
     public void buildChildren() {
